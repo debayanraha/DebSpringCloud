@@ -10,11 +10,37 @@ spring:
           uri: lb://fxol3-report
           predicates:
             - Path=/report/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: fxol3-report
+                fallbackuri: forward:/reportFallBack
         - id: fxol3-template
           uri: lb://fxol3-template
           predicates:
             - Path=/template/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: fxol3-template
+                fallbackuri: forward:/templateFallBack
 
 server:
   port: 9090
-  
+
+#Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#        include: hystrix.stream, health, info
+
+#Hystrix Configuration
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000

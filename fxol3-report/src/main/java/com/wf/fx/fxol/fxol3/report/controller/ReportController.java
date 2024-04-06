@@ -14,7 +14,7 @@ public class ReportController {
     Environment environment;
 
     @PostMapping("/getReport")
-    public String bookOrder() {
+    public String getReport() {
         return "Report Delivered from IP: "+environment.getProperty("local.server.port");
     }
 

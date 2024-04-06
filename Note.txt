@@ -1,13 +1,19 @@
 Service order:
-	fxol3-discovery-server	8585	http://localhost:8585/
+	fxol3-discovery-server	8585			http://localhost:8585/
 	fxol3-config-server	8595
-	fxol3-report		9011	9021	9031
-	fxol3-template		9012	9022	9032
-	fxol3-gateway		9090
+(below any order)
+	fxol3-report		9011	9021	9031	VM Option: -Dserver.port=9021
+	fxol3-template		9012	9022	9032	VM Option: -Dserver.port=9021
+	fxol3-gateway		9090			http://localhost:9090/actuator/hystrix.stream
+							http://localhost:9090/actuator/health
+							http://localhost:9090/actuator/info
+	fxol3-hystrix-dash	8580			http://localhost:8580/hystrix
+							(copy the stream to Dashboard: http://localhost:9090/actuator/hystrix.stream > monitor)
 
 
-VM Option: -Dserver.port=9021
 
+http://localhost:9090/report/getReport
+http://localhost:9090/template/createTemplate
 
 Config:
 
@@ -28,6 +34,26 @@ Gateway:
           predicates:
             - Path=/report/**
  -> Any request coming as /report/** will go to fxol3-report
+
+
+========================================
+
+New Addition
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Note.txt
+        modified:   fxol3-config-server/src/main/resources/application.yml
+        modified:   fxol3-gateway/pom.xml
+        modified:   fxol3-gateway/src/main/java/com/wf/fx/fxol/fxol3/gateway/Fxol3GatewayApplication.java
+        modified:   fxol3-gateway/src/main/resources/application.yml
+        modified:   fxol3-report/src/main/java/com/wf/fx/fxol/fxol3/report/controller/ReportController.java
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        fxol3-gateway/src/main/java/com/wf/fx/fxol/fxol3/gateway/FallbackController.java
+        fxol3-hystrix-dash/
 
 
 

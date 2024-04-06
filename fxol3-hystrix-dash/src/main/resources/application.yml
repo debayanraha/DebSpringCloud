@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: fxol3-hystrix-dashboard
+
+server:
+  port: 8580
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"
