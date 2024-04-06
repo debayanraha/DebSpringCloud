@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: FXOL3-GATEWAY
+  config:
+    import: optional:configserver:http://localhost:8595
+  cloud:
+    gateway:
+      routes:
+        - id: fxol3-report
+          uri: lb://fxol3-report
+          predicates:
+            - Path=/report/**
+        - id: fxol3-template
+          uri: lb://fxol3-template
+          predicates:
+            - Path=/template/**
+
+server:
+  port: 9090
+  

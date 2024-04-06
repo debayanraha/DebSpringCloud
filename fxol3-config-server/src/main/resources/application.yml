@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: CONFIG-SERVER
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/debayanraha/fxol3-config
+
+server:
+  port: 8595
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8585/eureka/
+  instance:
+    hostname: localhost    

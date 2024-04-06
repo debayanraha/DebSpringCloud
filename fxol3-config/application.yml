@@ -1,0 +1,19 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8585/eureka/
+  instance:
+    hostname: localhost
+    
+    
+service:
+  report:
+    endpoints:
+      endpoint:
+        uri: http://REPORT-SERVICE/report/getReport
+  template:
+    endpoints:
+      endpoint:
+        uri: http://TEMPLATE-SERVICE/template/createTemplate

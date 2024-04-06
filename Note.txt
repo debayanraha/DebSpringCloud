@@ -1,0 +1,37 @@
+Service order:
+	fxol3-discovery-server	8585	http://localhost:8585/
+	fxol3-config-server	8595
+	fxol3-report		9011	9021	9031
+	fxol3-template		9012	9022	9032
+	fxol3-gateway		9090
+
+
+VM Option: -Dserver.port=9021
+
+
+Config:
+
+service:
+  report:
+    endpoints:
+      endpoint:
+        uri: http://REPORT-SERVICE/report/getReport
+  template:
+    endpoints:
+      endpoint:
+        uri: http://TEMPLATE-SERVICE/template/createTemplate
+
+
+Gateway:
+        - id: fxol3-report
+          uri: lb://fxol3-report
+          predicates:
+            - Path=/report/**
+ -> Any request coming as /report/** will go to fxol3-report
+
+
+
+????
+
+spring.cloud.gateway.discovery.locator.enabled=true
+spring.cloud.gateway.discovery.locator.lower-case-service-id=true
